@@ -30,6 +30,16 @@ if(c==0):
     mycursor.execute(add_member, data_member)
     mydb.commit()
     print("Member, ", u, " is succesfully added.")
+print("Welcome to Library.")
+print("Name of member(username):",u)
+print("Membership id(password):",p)
+mycursor.execute("select Books_borrwed from member where name= '"+u+"'")
+book = mycursor.fetchone()
+if(book!="Null"):
+  print("Books issued:",book[0])
+  print("Books to be returned:",book[0])
+else:
+  print("No books borrowed.")
 
 
 
