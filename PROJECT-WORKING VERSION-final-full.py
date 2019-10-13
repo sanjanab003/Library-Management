@@ -131,7 +131,7 @@ def issue(r):
             if(b+1>0):
                   q2=input("Do you want to borrow this book: ")
                   if(q2=='y'):
-                        if(r=="NULL"):
+                        if(r=="NULL" or r==None):
                               iss(b,a)
                         else:
                               print("Please return book before borrowing")
@@ -160,19 +160,18 @@ def ret(g,i):
 
 
 def returned():
-      for j in t1:
-            w=j[2]
-      loopBook(w)
-      tup()
-      if(w!='NULL'):
-            q7=input('do you want to return the book?')
-            if(q7=='y'):
-                  ret(b,a)
-            else:
-                  pass;
-      else:
+      if(z=="NULL" or z==None):
             print('No Book borrowed')
-            
+      else:
+            q7=input('Do you want to return the book: ')
+            if(q7=='y'):
+                  loopBook(z)
+                  tup()
+                  ret(b+2,a)
+            elif(q7=="n"):
+                  pass;
+            else:
+                  print("Please give a valid answer")
 
 
 
