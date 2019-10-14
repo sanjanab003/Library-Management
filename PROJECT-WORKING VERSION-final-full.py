@@ -215,8 +215,6 @@ elif(areMem=="n"):
       else:
             reg()
             print("You are now a member of Sanchansu.")
-            print()
-            issue(z)
 else:
       print("Please give a valid answer")
       
