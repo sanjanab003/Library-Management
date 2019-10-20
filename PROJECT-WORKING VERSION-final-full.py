@@ -36,7 +36,7 @@ def regName():
 def reg():
       
       add_member = ("INSERT INTO member "
-               "(Name, M_Pass) "
+               "(username, M_Pass) "
                "VALUES (%s, %s)")
       data_member = (u,p)
       mycursor.execute(add_member, data_member)
@@ -96,9 +96,9 @@ def inp():
 
 def iss(e,f):
     op= """ update books set Qty = %s where Book_Name = %s """
-    op3= """ update member set Books_borrowed = %s where M_Pass = %s"""
+    op3= """ update member set Books_borrowed = %s where username = %s"""
     dat=(e,f)
-    dat3=(f,pas)
+    dat3=(f,user)
     mycursor.execute(op,dat)
     mycursor.execute(op3,dat3)
     if(e==0):
@@ -135,8 +135,10 @@ def issue(r):
                               iss(b,a)
                         else:
                               print("Please return book before borrowing")
-                  else:
+                  elif(q2=='n'):
                         pass;
+                  else:
+                        print("Please give a valid answer")
             else:
                   print("Sorry Book currently not available")
       else:
@@ -145,8 +147,8 @@ def issue(r):
 def ret(g,i):
       op4="""update books set Qty= %s where Book_Name=%s"""
       dat4=(g,i)
-      op5= """ update member set Books_borrowed = %s where M_Pass = %s"""
-      dat5=('NULL',pas)
+      op5= """ update member set Books_borrowed = %s where username = %s"""
+      dat5=('NULL',user)
       mycursor.execute(op4,dat4)
       mycursor.execute(op5,dat5)
       if(g>0):
@@ -200,21 +202,14 @@ if(areMem=="y"):
             print("Incorrect password or username")
       
 elif(areMem=="n"):
-      regName()
-      mycursor.execute("select * from member")
-      row = mycursor.fetchone()
-      while row is not None:
-            if(row[0]==pas or row[1]==user):
-                  c2=c2+1
-                  row=mycursor.fetchone()
-            else:
-                  row = mycursor.fetchone()
-      tup1()
-      if(c2>1):
-            print("Username or password is already taken")
-      else:
+      try:
+            regName()
             reg()
             print("You are now a member of Sanchansu.")
+      
+      except:
+            print("Username is already taken")
+            
 else:
       print("Please give a valid answer")
       
